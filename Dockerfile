@@ -28,12 +28,15 @@ WORKDIR /dist
 RUN cp /app/main .
 
 # Build a small image
+# NOTE: Trivy won't detect "scratch" images as far as summaries go.
+# Yields: DEBUG   [gobinary] Skipping vulnerability scan as no version is detected for the package        name="github.com/govwa"
+# See: https://github.com/aquasecurity/trivy/discussions/6989
 FROM scratch
 
 COPY --from=builder /dist/main /
 COPY ./config/config.json /config/config.json
 COPY ./templates/* /templates/
 COPY ./public/. /public/
-EXPOSE 8888
+EXPOSE 8000
 # Command to run
 CMD ["./main"]

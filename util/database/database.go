@@ -3,9 +3,10 @@ package database
 import (
 	"database/sql"
 	"fmt"
+	"log"
+
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/govwa/util/config"
-	"log"
 )
 
 func Connect() (*sql.DB, error) {
@@ -42,6 +43,7 @@ func Connect() (*sql.DB, error) {
 var DB *sql.DB
 
 func CheckDatabase() (bool, error) {
+	return true, nil
 
 	/* this function use to check if no database selected and will redirect to setup page */
 
